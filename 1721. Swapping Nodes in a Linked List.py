@@ -1,0 +1,38 @@
+'''
+You are given the head of a linked list, and an integer k.
+
+Return the head of the linked list after swapping the values of the kth node from the beginning and the kth node from
+the end (the list is 1-indexed).
+
+Example 1:
+Input: head = [1,2,3,4,5], k = 2
+Output: [1,4,3,2,5]
+
+Example 2:
+Input: head = [7,9,6,6,7,8,3,0,9,5], k = 5
+Output: [7,9,6,6,8,7,3,0,9,5]
+'''
+
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
+def swapNodes(head: ListNode, k: int) -> ListNode:
+    left_node = head
+    for i in range(1, k):
+        left_node = left_node.next
+    right_node = head
+    current = left_node
+    while current.next:
+        current = current.next
+        right_node = right_node.next
+    left_node.val, right_node.val = right_node.val, left_node.val
+    return head
+
+
+head = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
+k = 2
+print(swapNodes(head, k))
